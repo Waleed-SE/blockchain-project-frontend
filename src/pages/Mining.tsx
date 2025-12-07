@@ -3,7 +3,7 @@ import { useAuth } from '../contexts/AuthContext';
 import { blockchainAPI, transactionAPI } from '../services/api';
 
 export default function Mining() {
-  const { user } = useAuth();
+  const { } = useAuth();
   const [mining, setMining] = useState(false);
   const [pendingTxCount, setPendingTxCount] = useState(0);
   const [blockchainInfo, setBlockchainInfo] = useState<any>(null);

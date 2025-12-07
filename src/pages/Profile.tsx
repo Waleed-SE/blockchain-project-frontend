@@ -4,7 +4,6 @@ import { authAPI } from '../services/api';
 
 export default function Profile() {
   const { user, logout } = useAuth();
-  const [userData, setUserData] = useState<any>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
   const [success, setSuccess] = useState('');
@@ -17,7 +16,6 @@ export default function Profile() {
 
   useEffect(() => {
     if (user) {
-      setUserData(user);
       setFormData({
         full_name: user.full_name || '',
         email: user.email || '',
@@ -40,7 +38,7 @@ export default function Profile() {
     setSuccess('');
 
     try {
-      const response = await authAPI.updateProfile(formData);
+      await authAPI.updateProfile(formData);
       setSuccess('Profile updated successfully!');
       
       // Update local user data
@@ -52,7 +50,6 @@ export default function Profile() {
       
       // Update localStorage
       localStorage.setItem('user', JSON.stringify(updatedUser));
-      setUserData(updatedUser);
       setEditMode(false);
 
       if (formData.email !== user?.email) {

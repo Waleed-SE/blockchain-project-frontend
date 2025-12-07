@@ -8,7 +8,6 @@ export default function Wallet() {
   const [utxos, setUtxos] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
-  const [showPrivateKey, setShowPrivateKey] = useState(false);
 
   useEffect(() => {
     if (user?.wallet_id) {
@@ -19,9 +18,10 @@ export default function Wallet() {
   const fetchWalletData = async () => {
     try {
       setLoading(true);
+      if (!user?.wallet_id) return;
       const [walletRes, utxosRes] = await Promise.all([
-        walletAPI.getWallet(user?.wallet_id),
-        walletAPI.getUTXOs(user?.wallet_id)
+        walletAPI.getWallet(user.wallet_id),
+        walletAPI.getUTXOs(user.wallet_id)
       ]);
       
       setWalletData(walletRes.data.data);

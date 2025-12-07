@@ -154,7 +154,6 @@ export default function TransactionHistory() {
           {filteredTransactions.map((tx: any, index: number) => {
             const type = getTransactionType(tx);
             const isSent = type === 'sent';
-            const isReceived = type === 'received';
 
             return (
               <div 
